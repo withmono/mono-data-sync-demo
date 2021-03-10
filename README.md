@@ -47,7 +47,8 @@ $ git clone https://github.com/kingkenway/mono.git
 $ cd mono
 ```
 
-## Local Environment Variables
+## Local Environment Variables  
+Ensure you have your .env file created in the root directory, with the following parameters provided.  
 DATABASE_URL='Your Mongo DB URL'  
 MONO_SECRET_KEY='Your Mono Secret Key on your dashboard'  
 MONO_PUBLIC_KEY='Your Mono Public Key on your dashboard'  
