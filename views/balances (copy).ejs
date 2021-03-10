@@ -1,0 +1,91 @@
+<%- include('partials/header'); -%>
+<%- include('partials/sidebar'); -%>
+
+<div class="w3-container w3-padding">
+  Account Balances
+  <hr />
+
+  <% if (mono['data']) { %>
+
+    <h2>
+        Your Account Balances
+        <hr>
+    </h2>
+
+    <p class="inp">
+        NAME: <span class="name"></span>
+    </p>
+    
+    <p class="inp">
+        BVN: <span class="bvn"></span>
+    </p>
+    
+    <p class="inp">
+        ACCOUNT NUMBER: <span class="account"></span>
+    </p>
+    
+    <p class="inp">
+        CURRENCY: <span class="currency"></span>
+    </p>
+    
+    <p class="inp">
+        BALANCE: <span class="balance"></span>
+    </p>
+    
+    <p class="inp">
+        TYPE: <span class="type"></span>
+    </p>
+    
+
+
+  <% } else { %>
+    <div class="w3-center">
+        Your account is not linked yet
+    </div>
+  <% } %>
+
+
+</div>
+
+<%- include('partials/sidebar_end'); -%>
+
+<% if (mono['data']) { %>
+<script>
+    const mono = JSON.parse('<%- JSON.stringify(mono) %>');
+
+    const name = document.querySelector('.name');
+    const bvn = document.querySelector('.bvn');
+    const account = document.querySelector('.account');
+    const currency = document.querySelector('.currency');
+    const balance = document.querySelector('.balance');
+    const type = document.querySelector('.type');
+
+    (async function() {
+        // const url = `https://api.withmono.com/accounts/${mono.monoId}5f171a530295e231abca1153`
+        const url = `https://api.withmono.com/accounts/5f171a530295e231abca1153`
+
+        const res = await fetch(url, { 
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'mono-sec-key': mono.publicKey
+            }
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+
+        name.textContent = data.account.name
+        bvn.textContent = data.account.bvn
+        account.textContent = data.account.accountNumber
+        currency.textContent = data.account.currency
+        balance.textContent = data.account.balance
+        type.textContent = data.account.type
+
+    })();
+
+    </script>
+<% } %>
+
+<%- include('partials/footer'); -%>

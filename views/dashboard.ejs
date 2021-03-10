@@ -1,0 +1,135 @@
+<%- include('partials/header'); -%>
+<%- include('partials/sidebar'); -%>
+
+
+<div class="w3-container w3-padding">
+  Your Dashboard
+  <hr />
+
+  <% if (data['user']['monoId'] ) { %>
+
+    <h2>
+      Your User Information
+      <span class="w3-padding w3-green w3-round w3-small">
+        ACCOUNT CONNECTED
+      </span>
+      <hr>
+    </h2>
+
+    <p class="inp w3-third w3-margin-bottom">
+      TITLE:
+      <span><%= dashboard['title'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      FIRST NAME:
+      <span><%= dashboard['firstName'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      MIDDLE NAME:
+      <span><%= dashboard['middleName'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      LAST NAME:
+      <span><%= dashboard['lastName'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      PHONE NUMBER 1:
+      <span><%= dashboard['phoneNumber1'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      PHONE NUMBER 2:
+      <span><%= dashboard['phoneNumber2'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      EMAIL:
+      <span><%= dashboard['email'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      GENDER:
+      <span><%= dashboard['gender'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      LGA OF ORIGIN:
+      <span><%= dashboard['lgaOfOrigin'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      LGA OF RESIDENCE:
+      <span><%= dashboard['lgaOfResidence'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      MARITAL STATUS:
+      <span><%= dashboard['maritalStatus'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      NIN:
+      <span><%= dashboard['nin'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      NATIONALITY:
+      <span><%= dashboard['nationality'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      RESIDENTIAL ADDRESS:
+      <span><%= dashboard['residentialAddress'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      STATE OF ORIGIN:
+      <span><%= dashboard['stateOfOrigin'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      STATE OF RESIDENCE:
+      <span><%= dashboard['stateOfResidence'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      WATCH LISTED:
+      <span><%= dashboard['watchListed'] %></span>
+    </p>
+
+    <p class="inp w3-third w3-margin-bottom">
+      BVN:
+      <span><%= dashboard['bvn'] %></span>
+    </p>
+
+
+
+
+  <% } else { %>
+    <div>
+      <button id="launch-btn">Link your financial account</button>
+    </div>
+  <% } %>
+
+
+</div>
+
+
+<%- include('partials/sidebar_end'); -%>
+
+<%- include('partials/mono_dialog'); -%>
+
+<script type="application/javascript">
+  async function get() {
+
+  
+  }
+
+  get()
+</script>
+
+<%- include('partials/footer'); -%>

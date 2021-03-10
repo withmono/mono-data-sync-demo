@@ -1,0 +1,141 @@
+<%- include('partials/header'); -%>
+<%- include('partials/sidebar'); -%>
+
+<div class="w3-container w3-padding">
+  Account Balances 
+
+  <% if ( data['user']['monoId'] ) { %>
+    <span onclick="sync()" class="w3-button w3-border w3-round w3-right">Refresh</span>
+  <% } %>
+  <hr />
+  
+  <h2>
+      Your Account Balance
+      <hr>
+  </h2>
+
+  <% if ( data['user']['monoBalance'] && data['user']['monoId'] ) { %>
+
+    <p class="inp">
+        NAME:
+        <span><%= data['monoBalance']['name'] %></span>
+    </p>
+    
+    <p class="inp">
+        BVN:
+        <span><%= data['monoBalance']['bvn'] %></span>
+    </p>
+    
+    <p class="inp">
+        ACCOUNT NUMBER:
+        <span><%= data['monoBalance']['accountNumber'] %></span>
+    </p>
+    
+    <p class="inp">
+        CURRENCY:
+        <span><%= data['monoBalance']['currency'] %></span>
+    </p>
+    
+    <p class="inp">
+        BALANCE:
+        <span><%= setCurrency(data['monoBalance']['balance']) %></span>
+    </p>
+    
+    <p class="inp">
+        TYPE:
+        <span><%= data['monoBalance']['type'] %></span>
+    </p>
+
+
+
+  <% } else if (balances) { %>
+
+    <p class="inp">
+        NAME:
+        <span><%= balances['account']['name'] %></span>
+    </p>
+    
+    <p class="inp">
+        BVN:
+        <span><%= balances['account']['bvn'] %></span>
+    </p>
+    
+    <p class="inp">
+        ACCOUNT NUMBER:
+        <span><%= balances['account']['accountNumber'] %></span>
+    </p>
+    
+    <p class="inp">
+        CURRENCY:
+        <span><%= balances['account']['currency'] %></span>
+    </p>
+    
+    <p class="inp">
+        BALANCE:
+        <span><%= setCurrency(balances['account']['balance']) %></span>
+    </p>
+    
+    <p class="inp">
+        TYPE:
+        <span><%= balances['account']['type'] %></span>
+    </p>
+    
+
+  <% } else { %>
+    <div class="w3-center">
+        Your account is not linked yet
+    </div>
+  <% } %>
+
+
+</div>
+
+<script type="application/javascript">
+    const data = JSON.parse('<%- JSON.stringify(data) %>');
+
+    let sync = async () => {
+        const url = `https://api.withmono.com/accounts/${data.user.monoId}/sync`
+
+		const response = await fetch(url, { 
+			method: 'POST', 
+			headers: {
+				'Content-Type': 'application/json',
+				'mono-sec-key': data.secretKey
+			}
+		});
+
+		const result = await response.json();
+        
+        console.log(result);
+		// alert(result.code)
+
+        if (result.code == "SYNC_SUCCESSFUL"){
+            location.assign('/balances');
+        }
+        
+        else if(result.code == "REAUTHORISATION_REQUIRED"){
+
+            const response2 = await fetch('/monoReauth', { 
+                method: 'POST',
+                body: JSON.stringify({ id: data.user.monoId }),
+                headers: {'Content-Type': 'application/json'}
+            });
+
+            const result2 = await response2.json();
+
+            if (result2.status == "redirect") {
+                // location.assign('/monoReauth');
+                location.assign('/balances');
+            }
+
+        }
+
+    }
+
+    // sync(data.user.monoId)
+
+</script>
+
+<%- include('partials/sidebar_end'); -%>
+
+<%- include('partials/footer'); -%>

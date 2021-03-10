@@ -1,0 +1,104 @@
+<%- include('partials/header'); -%>
+<%- include('partials/sidebar'); -%>
+
+<div class="w3-container w3-padding">
+  Your Transactions
+  <hr />
+
+  <% if ( transactions && transactions == "PROCESSING" ) { %>
+    
+    <div class="w3-center">
+        Transaction data is still processing.
+    </div>
+
+  <% } else if ( data['user']['monoId'] ) { %>
+
+    <h2>
+        All Transactions
+        <hr>
+    </h2>
+
+    <div class="w3-container">
+        <div class="w3-left">
+            <div class="w3-bar">
+                <% if (transactions.paging.previous) { %>
+                    <a href="<%= getPage(transactions.paging.previous) %>" class="w3-button">&laquo;</a>
+                <% } %>
+
+                <a class="">Page <%= transactions.paging.page %></a>
+
+                <% if (transactions.paging.next) { %>
+                    <a href="<%= getPage(transactions.paging.next) %>" class="w3-button">&raquo;</a>
+                <% } %>
+                
+            </div>
+        </div>
+
+        <div class="w3-right">
+            Page <%= transactions.paging.page %> of <%= Math.floor(transactions.paging.total/20) %>
+        </div>
+        
+        <table class="w3-table w3-striped w3-bordered">
+            <tr>
+                <th>S/N</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Balance</th>
+                <th>Narration</th>
+            </tr>
+
+            <% for(var i=0; i < transactions.data.length; i++) { %>
+                <tr>
+                  <td>
+                    <%= (i + 1) + ( transactions.paging.page * 20) -20  %>                
+                  </td>
+                  <td><%= transactions.data[i].type %></td>
+                  <td class="sp"><%= formatTime(transactions.data[i].date) %></td>
+                  <td class="sp">NGN <%= setCurrency(transactions.data[i].amount) %></td>
+                  <td class="sp">NGN <%= setCurrency(transactions.data[i].balance) %></td>
+                  <td><%= transactions.data[i].narration %></td>
+                </tr>
+             <% } %>
+            
+        </table>
+
+
+        <div class="w3-center w3-margin-top">
+            <div class="w3-bar">
+                <% if (transactions.paging.previous) { %>
+                    <a href="<%= getPage(transactions.paging.previous) %>" class="w3-button">&laquo;</a>
+                <% } %>
+
+                <a class="w3-button">Page <%= transactions.paging.page %></a>
+
+                <% if (transactions.paging.next) { %>
+                    <a href="<%= getPage(transactions.paging.next) %>" class="w3-button">&raquo;</a>
+                <% } %>
+                
+            </div>
+        </div>
+        
+    </div>
+
+
+  <% } else { %>
+    <div class="w3-center">
+        Your account is not linked yet
+    </div>
+  <% } %>
+
+
+</div>
+
+<%- include('partials/sidebar_end'); -%>
+
+<script type="application/javascript">
+    // function page(page){
+    //     const page_number = page.split("page=");
+
+    //     return `?page=${page_number}`
+    // }
+</script>
+
+<%- include('partials/footer'); -%>

@@ -1,0 +1,58 @@
+<script type="application/javascript">
+    const data = JSON.parse('<%- JSON.stringify(data) %>');
+
+    const reauthToken = data.user.monoReauthToken;
+
+    const copyToClipboard = text => {
+        const elm = document.createElement('textarea');
+        elm.value = text;
+        document.body.appendChild(elm);
+        elm.select();
+        document.execCommand('copy');
+        document.body.removeChild(elm);
+    };
+    var connect;
+    var config = {
+        key: data.publicKey,
+        onSuccess: function (response) {
+            (async () => {
+
+                console.log('we in');
+
+                try {
+                    const res = await fetch('/dashboard', { 
+                        method: 'POST', 
+                        body: JSON.stringify({ code: response.code, id: data.user._id }),
+                        headers: {'Content-Type': 'application/json'}
+                    });
+
+                    const val = await res.json();
+                    alert(val)
+                    console.log(val);
+                
+                    if (val) {
+                        location.assign('/dashboard');
+                    }
+
+                }
+                catch (err) {
+                    console.log(err);
+                    alert(err);
+                }
+            
+			})();
+
+        },
+        onClose: function () {
+            console.log('user closed the widget.')
+        }
+    };
+    connect = new Connect(config);
+    connect.reauthorise(reauthToken);
+
+    var launch = document.getElementById('launch-btn');
+    launch.onclick = function (e) {
+        connect.open();
+    };
+
+</script>

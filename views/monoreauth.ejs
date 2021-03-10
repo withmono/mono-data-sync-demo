@@ -1,0 +1,36 @@
+<%- include('partials/header'); -%>
+<%- include('partials/sidebar'); -%>
+
+
+<div class="w3-container w3-padding">
+  Your Dashboard
+  <hr />
+
+  <% if (data['user']['monoStatus'] ) { %>
+    <div>
+      <button id="launch-btn">Reauthorise your financial account</button>
+    </div>
+  <% } else { %>
+    <div>
+        Nothing to do here. No pending re-authorisation!
+    </div>
+  <% } %>
+
+
+</div>
+
+
+<%- include('partials/sidebar_end'); -%>
+
+<%- include('partials/mono_reauth_dialog'); -%>
+
+<script type="application/javascript">
+  async function get() {
+
+  
+  }
+
+  get()
+</script>
+
+<%- include('partials/footer'); -%>
