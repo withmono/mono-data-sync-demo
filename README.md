@@ -62,9 +62,5 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```javascript
-node app.js
-```
-or
-```javascript
-nodemon app.js
+npm start
 ```
