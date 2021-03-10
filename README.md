@@ -36,7 +36,7 @@ It is built with NodeJS Express, which basically implements the core features of
 
 7. Lastly, you can force refresh by Data syncing manually, which can be triggered with the button displayed on the Balances page. 
 
-You can register [here](https://sweet-loans.herokuapp.com/signup) to give this application a shoot.
+You can register [here](https://sweet-loans.herokuapp.com/signup) to give this application a shot.
 
 ## 3. Installation
 
