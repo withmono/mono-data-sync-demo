@@ -35,9 +35,7 @@ It is built with NodeJS Express, which basically implements the core features of
 
 6. Also, all transaction history with pagination is viewed, through Mono's API transaction Endpoint -> https://api.withmono.com/accounts/id/transaction?page=1 through GET Method right [here](https://github.com/kingkenway/mono/blob/master/controllers/allControllers.js#L121) <br />
 
-7. Lastly, I couln't get Mono's force refresh data sync to go through, since the Scyn end point kept throwing-> "message": "This account can not be synced." with "code": "SYNC_ERROR". This led to the application sticking to a good 'ol normal page reload.
-
-N.B Please note that the application is in Test mode, which implies that Mono's widget provides an option for test sign in. And also, all provided data from Mono's API are tests data. <br />
+7. Lastly, you can force refresh by Data syncing manually, which can be triggered with the button displayed on the Balances page. 
 
 You can register [here](https://sweet-loans.herokuapp.com/signup) to give this application a shoot.
 
@@ -54,6 +52,8 @@ $ cd mono
 DATABASE_URL='Your Mongo DB URL'  
 MONO_SECRET_KEY='Your Mono Secret Key on your dashboard'  
 MONO_PUBLIC_KEY='Your Mono Public Key on your dashboard'  
+MONO_WEBHOOK_SEC='Your Mono Webhook Secret Key on your dashboard'
+TOKEN='A random key identifier for JWT Verification'
 
 ## Project setup
 ```
