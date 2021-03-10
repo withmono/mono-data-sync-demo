@@ -52,7 +52,7 @@ $ cd mono
 DATABASE_URL='Your Mongo DB URL'  
 MONO_SECRET_KEY='Your Mono Secret Key on your dashboard'  
 MONO_PUBLIC_KEY='Your Mono Public Key on your dashboard'  
-MONO_WEBHOOK_SEC='Your Mono Webhook Secret Key on your dashboard'
+MONO_WEBHOOK_SEC='Your Mono Webhook Secret Key on your dashboard'  
 TOKEN='A random key identifier for JWT Verification'
 
 ## Project setup
